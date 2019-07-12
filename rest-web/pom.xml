@@ -15,7 +15,18 @@
     <name>${project.groupId}-${project.artifactId}</name>
     <build>
         <finalName>${project.name}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.5.RELEASE</version>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
 
     <properties>
         <start-class>com.indorse.blood.bank.rest.web.BloodBankApplication</start-class>
