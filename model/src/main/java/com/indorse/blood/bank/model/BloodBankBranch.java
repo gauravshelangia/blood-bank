@@ -21,6 +21,10 @@ public class BloodBankBranch extends BaseEntity{
     private String addressLine1;
     @Column
     private String addressLine2;
+
+    @Column
+    private String phoneNumber;
+
     @ManyToOne
     @JoinColumn(name = "blood_bank_id")
     private BloodBank bloodBank;
