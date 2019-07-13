@@ -32,5 +32,12 @@
         <start-class>com.indorse.blood.bank.rest.web.BloodBankApplication</start-class>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

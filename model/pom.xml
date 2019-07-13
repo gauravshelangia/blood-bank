@@ -17,5 +17,7 @@
         <finalName>${project.name}</finalName>
     </build>
 
+    <dependencies>
 
+    </dependencies>
 </project>
