@@ -1,7 +1,9 @@
 package com.indorse.blood.bank.service.api;
 
 import com.indorse.blood.bank.rest.web.model.MemberDto;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface MemberService {
 
     /**
@@ -20,8 +22,9 @@ public interface MemberService {
     /**
      * Delete member by memberCode or email
      * @param memberCode
+     * @param email
      */
-    void deleteByMemberCode(String memberCode, String email);
+    void deleteByMemberCodeOrEmail(String memberCode, String email);
 
     /**
      * Get memberDetail by memberCode or email
@@ -29,6 +32,6 @@ public interface MemberService {
      * @param email
      * @return
      */
-    MemberDto getByMemberCode(String memberCode, String email);
+    MemberDto getByMemberCodeOrEmail(String memberCode, String email);
 
 }

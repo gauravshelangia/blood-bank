@@ -22,6 +22,15 @@
             <groupId>com.indorse.blood.bank</groupId>
             <artifactId>blood-bank-service-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-dao-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -2,9 +2,11 @@ package com.indorse.blood.bank.service.api;
 
 import com.indorse.blood.bank.model.BloodDonationDetail;
 import com.indorse.blood.bank.rest.web.model.BloodDonationDetailDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface BloodDonationDetailService {
 
     /**

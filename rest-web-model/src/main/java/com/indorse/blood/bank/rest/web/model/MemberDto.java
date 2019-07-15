@@ -6,11 +6,12 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MemberDto extends BaseDto{
+public class MemberDto extends BaseDto {
     private String firstName;
     private String middleName;
     private String lastName;
     private BloodGroup bloodGroup;
     private Date dateOfBirth;
     private String email;
+    private String memberId;
 }

@@ -3,7 +3,9 @@ package com.indorse.blood.bank.service.api;
 import com.indorse.blood.bank.model.constant.BloodGroup;
 import com.indorse.blood.bank.model.constant.BloodSubType;
 import com.indorse.blood.bank.rest.web.model.BloodInventoryDto;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface BloodInventoryService {
 
     /**

@@ -36,7 +36,18 @@
         <dependency>
             <groupId>com.indorse.blood.bank</groupId>
             <artifactId>blood-bank-model</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-rest-web-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-service-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-service-impl</artifactId>
         </dependency>
     </dependencies>
 
