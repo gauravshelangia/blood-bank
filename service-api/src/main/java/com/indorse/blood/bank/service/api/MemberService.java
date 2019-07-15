@@ -10,4 +10,25 @@ public interface MemberService {
      * @return memberCode
      */
     String add(MemberDto memberDto);
+
+    /**
+     * Update existing memberDetail
+     * @param memberDto
+     */
+    void update(MemberDto memberDto);
+
+    /**
+     * Delete member by memberCode or email
+     * @param memberCode
+     */
+    void deleteByMemberCode(String memberCode, String email);
+
+    /**
+     * Get memberDetail by memberCode or email
+     * @param memberCode
+     * @param email
+     * @return
+     */
+    MemberDto getByMemberCode(String memberCode, String email);
+
 }

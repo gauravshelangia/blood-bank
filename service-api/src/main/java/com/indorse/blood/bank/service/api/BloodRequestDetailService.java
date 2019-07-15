@@ -21,4 +21,10 @@ public interface BloodRequestDetailService {
      * @param bloodRequestId
      */
     void getBloodRequestDetail(Long bloodRequestId);
+
+    /**
+     * Delete bloodRequestDetail by id
+     * @param bloodRequestId
+     */
+    void deleteBloodRequestDetailById(Long bloodRequestId);
 }

@@ -23,4 +23,9 @@ public interface BloodBankService {
      */
     BloodBankDto getByName(String name);
 
+    /**
+     * Delete Bank by bankName
+     * @param bloodBankName
+     */
+    void deleteByName(String bloodBankName);
 }

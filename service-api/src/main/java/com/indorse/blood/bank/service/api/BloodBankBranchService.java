@@ -31,4 +31,11 @@ public interface BloodBankBranchService {
      * @return
      */
     List<BloodBankBranchDto> getAllBloodBankBranches(String bloodBankName);
+
+    /**
+     * Delete blood bank branch by branch code
+     * @param branchCode
+     */
+    void deleteByBranchCode(String branchCode);
+
 }

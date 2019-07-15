@@ -17,5 +17,11 @@
         <finalName>${project.name}</finalName>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-service-api</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
