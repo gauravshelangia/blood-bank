@@ -25,4 +25,6 @@ public class Member extends BaseEntity {
     private Date dateOfBirth;
     @Column
     private String email;
+    @Column(unique = true)
+    private String memberId;
 }

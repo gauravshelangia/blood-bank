@@ -11,6 +11,8 @@ public class BloodBankBranch extends BaseEntity{
 
     @Column
     private String branchName;
+    @Column(unique = true)
+    private String branchCode;
     @Column
     private String country;
     @Column
@@ -21,7 +23,6 @@ public class BloodBankBranch extends BaseEntity{
     private String addressLine1;
     @Column
     private String addressLine2;
-
     @Column
     private String phoneNumber;
 

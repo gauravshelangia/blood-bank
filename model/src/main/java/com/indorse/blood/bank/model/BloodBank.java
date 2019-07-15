@@ -11,6 +11,6 @@ import javax.persistence.Table;
 @Table(name = "blood_bank")
 public class BloodBank extends BaseEntity{
 
-    @Column
+    @Column(unique = true)
     private String name;
 }

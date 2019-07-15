@@ -17,7 +17,10 @@ public class BloodRequestDetail extends BaseEntity {
     private Member member;
     @ManyToOne
     @JoinColumn(name = "requested_at")
-    private BloodBankBranch bloodBankBranch;
+    private BloodBankBranch requestedFromBranch;
+    @ManyToOne
+    @JoinColumn(name = "given_from")
+    private BloodBankBranch givenFromBranch;
     @Column
     private Date givenOn;
     @Column
@@ -30,6 +33,9 @@ public class BloodRequestDetail extends BaseEntity {
     private Boolean requestCompleted;
     @Column
     private String info;
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private BloodInventory bloodInventory;
 
 
 }

@@ -35,4 +35,7 @@ public class BaseEntity {
     @Column(name = FieldNames.UPDATED_BY)
     private String updatedBy;
 
+    @Column
+    private Boolean markForDelete;
+
 }

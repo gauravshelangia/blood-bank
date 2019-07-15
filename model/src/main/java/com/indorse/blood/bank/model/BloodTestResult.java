@@ -3,6 +3,7 @@ package com.indorse.blood.bank.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -19,4 +20,6 @@ public class BloodTestResult extends BaseEntity {
     private Boolean passed;
     @Column
     private String info;
+    @Column
+    private Date conductedOn;
 }
