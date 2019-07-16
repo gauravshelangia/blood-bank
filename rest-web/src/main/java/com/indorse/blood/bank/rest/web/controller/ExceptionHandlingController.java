@@ -1,4 +1,4 @@
-package com.indorse.blood.bank.rest.web;
+package com.indorse.blood.bank.rest.web.controller;
 
 import com.indorse.blood.bank.model.exception.BloodBankException;
 import com.indorse.blood.bank.rest.web.model.ApiResponseDto;
@@ -9,10 +9,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Locale;
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.indorse.blood.bank.rest.web.controller", annotations = RestController.class)
 public class ExceptionHandlingController {
     private static Logger LOG = LoggerFactory.getLogger(ExceptionHandlingController.class);
 

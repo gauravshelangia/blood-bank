@@ -10,7 +10,6 @@ public class ApiResponseDto<E> {
     private E data;
     private String message;
     private String status;
-    private String statusCode;
 
     public ApiResponseDto(String message, String status) {
         this.message = message;

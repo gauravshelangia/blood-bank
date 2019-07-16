@@ -11,7 +11,7 @@ public interface MemberService {
      * @param memberDto
      * @return memberCode
      */
-    String add(MemberDto memberDto);
+    MemberDto add(MemberDto memberDto);
 
     /**
      * Update existing memberDetail
@@ -21,17 +21,17 @@ public interface MemberService {
 
     /**
      * Delete member by memberCode or email
-     * @param memberCode
+     * @param memberId
      * @param email
      */
-    void deleteByMemberCodeOrEmail(String memberCode, String email);
+    void deleteByMemberIdOrEmail(String memberId, String email);
 
     /**
      * Get memberDetail by memberCode or email
-     * @param memberCode
+     * @param memberId
      * @param email
      * @return
      */
-    MemberDto getByMemberCodeOrEmail(String memberCode, String email);
+    MemberDto getByMemberIdOrEmail(String memberId, String email);
 
 }
