@@ -8,11 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.indorse.blood.bank")
 @EntityScan(basePackages = "com.indorse.blood.bank.model")
-@ComponentScan(basePackages = "com.indorse.blood.bank.*")
-@EnableJpaRepositories(basePackages = "com.indorse.blood.bank.dao.*")
-@EnableWebMvc
+@ComponentScan(basePackages = "com.indorse.blood.bank")
+@EnableJpaRepositories(basePackages = "com.indorse.blood.bank.dao")
 public class BloodBankApplication {
 
 	public static void main(String[] args) {

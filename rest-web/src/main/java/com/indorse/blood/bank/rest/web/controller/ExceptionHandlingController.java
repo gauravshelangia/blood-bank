@@ -21,15 +21,15 @@ public class ExceptionHandlingController {
     private MessageSource messageSource;
 
 
-    @ExceptionHandler(BloodBankException.class)
+    @ExceptionHandler({BloodBankException.class})
     @ResponseBody
-    public ApiResponseDto handleBloodBankException(BloodBankException e, Locale locale) {
+    public ApiResponseDto bloodBankExceptionHandler(BloodBankException e, Locale locale) {
         LOG.error("Error : ", e);
         String message = messageSource.getMessage(e.getErrorCode().getMessageKey(), e.getParams(), locale);
         return new ApiResponseDto( message, ApiResponseDto.STATUS_ERROR);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({Exception.class})
     @ResponseBody
     public ApiResponseDto genericExceptionHandler(Exception e) {
         LOG.error("Error : ", e);
