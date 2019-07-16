@@ -36,7 +36,7 @@ public class MemberController {
     }
 
     @PutMapping(value = "/{memberId}")
-    public ApiResponseDto<MemberDto> updateMember(HttpServletRequest request, @RequestBody MemberDto memberDto){
+    public ApiResponseDto<MemberDto> updateMember(HttpServletRequest request, @PathVariable String memberId, @RequestBody MemberDto memberDto){
         memberService.update(memberDto);
         return new ApiResponseDto<>( "Member Updated successfully", ApiResponseDto.STATUS_SUCCESS);
     }

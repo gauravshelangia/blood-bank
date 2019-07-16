@@ -20,6 +20,8 @@ public class BloodBankBranch extends BaseEntity{
     @Column
     private String city;
     @Column
+    private String postalCode;
+    @Column
     private String addressLine1;
     @Column
     private String addressLine2;

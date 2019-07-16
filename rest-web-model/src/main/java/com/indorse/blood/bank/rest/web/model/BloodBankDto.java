@@ -6,4 +6,5 @@ import lombok.Data;
 public class BloodBankDto extends BaseDto {
 
     private String name;
+    private String bankCode;
 }

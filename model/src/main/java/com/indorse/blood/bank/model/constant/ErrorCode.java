@@ -1,10 +1,11 @@
 package com.indorse.blood.bank.model.constant;
 
 public enum  ErrorCode {
-    NEW_MEMBER_WITH_MEMBER_ID("new.member.with.id"),
-    NEW_MEMBER_EMPTY("new.member.empty"),
+    NEW_MEMBER_WITH_MEMBER_ID("new.member.with.id.error"),
+    CRUD_EMPTY_ENTITY_ERROR("crud.empty.entity.error"),
+    BLOOD_BANK_NOT_EXIST("blood.bank.not.exists"),
 
-    RESOURCE_NOT_FOUND("resource.not.found");
+    RESOURCE_NOT_FOUND("resource.not.found.error");
 
 
 

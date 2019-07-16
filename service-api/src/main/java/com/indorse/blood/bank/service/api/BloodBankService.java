@@ -1,5 +1,6 @@
 package com.indorse.blood.bank.service.api;
 
+import com.indorse.blood.bank.model.BloodBank;
 import com.indorse.blood.bank.rest.web.model.BloodBankDto;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +10,9 @@ public interface BloodBankService {
     /**
      * Save or add/register new @link{BloodBank}
      * @param bloodBankDto
+     * @return
      */
-    void save(BloodBankDto bloodBankDto);
+    BloodBankDto save(BloodBankDto bloodBankDto);
 
     /**
      * Update existing @link{BloodBank} details
@@ -28,6 +30,15 @@ public interface BloodBankService {
     /**
      * Delete Bank by bankName
      * @param bloodBankName
+     * @param bloodBankCode
      */
-    void deleteByName(String bloodBankName);
+    void deleteByNameOrBankCode(String bloodBankName, String bloodBankCode);
+
+    /**
+     * Get @link{BloodBank} detail by name
+     * @param name
+     * @return
+     */
+    BloodBank getBloodBankModelByName(String name);
+
 }

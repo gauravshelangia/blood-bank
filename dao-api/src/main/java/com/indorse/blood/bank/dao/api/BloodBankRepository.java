@@ -7,4 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BloodBankRepository extends CrudRepository<BloodBank, Long> {
 
+    /**
+     * Get blood bank by bank code or bank name
+     * @param bankCode
+     * @param name
+     * @return
+     */
+    BloodBank findByBankCodeOrName(String bankCode, String name);
 }

@@ -11,8 +11,9 @@ public interface BloodBankBranchService {
     /**
      * Add blood bank Branch
      * @param bloodBankBranchDto
+     * @return
      */
-    void add(BloodBankBranchDto bloodBankBranchDto);
+    BloodBankBranchDto add(BloodBankBranchDto bloodBankBranchDto);
 
     /**
      * Update an existing blood bank branch details

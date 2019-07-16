@@ -24,10 +24,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto add(MemberDto memberDto) {
         if (ObjectUtils.isEmpty(memberDto)){
-            throw new BloodBankException(NEW_MEMBER_EMPTY, new Object[]{});
+            throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"member"});
         }
         if (!ObjectUtils.isEmpty(memberDto.getMemberId())){
-            throw new BloodBankException(NEW_MEMBER_WITH_MEMBER_ID, new Object[]{memberDto.getMemberId()});
+            throw new BloodBankException(NEW_MEMBER_WITH_MEMBER_ID,
+                    new Object[]{ memberDto.getFirstName(), memberDto.getMemberId()});
         }
         Member member = new Member();
         BeanUtils.copyProperties(memberDto, member);
@@ -40,6 +41,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void update(MemberDto memberDto) {
+        if (ObjectUtils.isEmpty(memberDto)){
+            throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"member"});
+        }
         Member member = memberRepository.findByMemberIdOrEmail(memberDto.getMemberId(), memberDto.getEmail());
         if (ObjectUtils.isEmpty(member)){
             throw new BloodBankException(RESOURCE_NOT_FOUND,new Object[]{"Member", memberDto.getMemberId() + ", "
