@@ -10,13 +10,6 @@ import java.util.List;
 public interface BloodDonationDetailRepository extends CrudRepository<BloodDonationDetail, Long> {
 
     /**
-     * Get details by TestStore id
-     * @param id
-     * @return
-     */
-    BloodDonationDetail findByBloodTestStoreId(Long id);
-
-    /**
      * Get detail by donationUniqueId
      * @param donationUniqueId
      * @return
