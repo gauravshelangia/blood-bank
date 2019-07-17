@@ -1,5 +1,6 @@
 package com.indorse.blood.bank.service.api;
 
+import com.indorse.blood.bank.model.BloodBankBranch;
 import com.indorse.blood.bank.rest.web.model.BloodBankBranchDto;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,23 @@ public interface BloodBankBranchService {
     List<BloodBankBranchDto> getAllBloodBankBranches(String bloodBankName);
 
     /**
+     * Delete all branches of a bank
+     * @param bloodBankName
+     */
+    void deleteAllBloodBankBranches(String bloodBankName);
+
+    /**
      * Delete blood bank branch by branch code
      * @param branchCode
      */
     void deleteByBranchCode(String branchCode);
+
+    /**
+     * Get BloodBank branch Model by branchCode
+     * @param branchCode
+     * @return
+     */
+    BloodBankBranch getBloodBankBranchModelByBranchCode(String branchCode);
+
 
 }

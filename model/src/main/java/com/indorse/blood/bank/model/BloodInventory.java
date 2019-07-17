@@ -25,4 +25,12 @@ public class BloodInventory extends BaseEntity {
     private Date expiresOn;
     @Column
     private Boolean active;
+    @Column(unique = true)
+    private String inventoryCode;
+    @OneToOne
+    @JoinColumn(name = "donation_detail_id")
+    private BloodDonationDetail bloodDonationDetail;
+    @OneToOne
+    @JoinColumn(name = "test_store_id")
+    private BloodTestStore bloodTestStore;
 }

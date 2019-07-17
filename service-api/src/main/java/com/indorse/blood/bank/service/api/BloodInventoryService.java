@@ -1,5 +1,6 @@
 package com.indorse.blood.bank.service.api;
 
+import com.indorse.blood.bank.model.BloodInventory;
 import com.indorse.blood.bank.model.constant.BloodGroup;
 import com.indorse.blood.bank.model.constant.BloodSubType;
 import com.indorse.blood.bank.rest.web.model.BloodInventoryDto;
@@ -11,8 +12,9 @@ public interface BloodInventoryService {
     /**
      * Add donated blood to inventory, with marking as inactive
      * @param bloodInventoryDto
+     * @return
      */
-    void add(BloodInventoryDto bloodInventoryDto);
+    BloodInventoryDto add(BloodInventoryDto bloodInventoryDto);
 
     /**
      * Update inventory
@@ -30,8 +32,27 @@ public interface BloodInventoryService {
     BloodInventoryDto getBlood(BloodGroup bloodGroup, BloodSubType bloodSubType, Integer quantity);
 
     /**
-     * Mark blood as inactive by inventoryId
-     * @param inventoryId
+     * Get blood inventory by inventory code
+     * @param donationUniqueId
+     * @return
      */
-    void markInventoryAsInactive(Long inventoryId);
+    BloodInventory getBloodInventoryByDonationUniqueCode(String donationUniqueId);
+
+
+    /**
+     * Get blood if available by bloodGroup, bloodSubType and quantity
+     * @param bloodGroup
+     * @param bloodSubType
+     * @param quantity
+     * @return
+     */
+    boolean isBloodAvailable(BloodGroup bloodGroup, BloodSubType bloodSubType, Integer quantity);
+
+
+    /**
+     * Mark blood as inactive by inventoryId
+     * @param inventoryCode
+     */
+    void markInventoryAsInactive(String inventoryCode);
+
 }

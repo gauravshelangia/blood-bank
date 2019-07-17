@@ -12,14 +12,15 @@ public interface BloodDonationDetailService {
     /**
      * Save blood donation detail
      * @param donationDetailDto
+     * @return
      */
-    void save(BloodDonationDetailDto donationDetailDto);
+    BloodDonationDetailDto save(BloodDonationDetailDto donationDetailDto);
 
     /**
      * update existing blood donation details
-     * @param donationDetail
+     * @param donationDetailDto
      */
-    void update(BloodDonationDetail donationDetail);
+    void update(BloodDonationDetailDto donationDetailDto);
 
     /**
      * Get all donation detail by a member
@@ -30,7 +31,7 @@ public interface BloodDonationDetailService {
 
     /**
      * Delete donation detail by Id
-     * @param donationDetailId
+     * @param donationUniqueId
      */
-    void delete(Integer donationDetailId);
+    void delete(String donationUniqueId);
 }

@@ -1,6 +1,7 @@
 package com.indorse.blood.bank.model;
 
 import com.indorse.blood.bank.model.constant.BloodGroup;
+import com.indorse.blood.bank.model.constant.BloodSubType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,7 +23,10 @@ public class BloodDonationDetail extends BaseEntity {
     @Column
     private BloodGroup bloodGroup;
     @Column
+    private BloodSubType bloodSubType;
+    @Column
     private Integer quantityInMl;
-
+    @Column(unique = true)
+    private String donationUniqueId;
 
 }

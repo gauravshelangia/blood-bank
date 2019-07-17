@@ -1,5 +1,6 @@
 package com.indorse.blood.bank.service.api;
 
+import com.indorse.blood.bank.model.Member;
 import com.indorse.blood.bank.rest.web.model.MemberDto;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,12 @@ public interface MemberService {
      * @return
      */
     MemberDto getByMemberIdOrEmail(String memberId, String email);
+
+    /**
+     * Get Member by memberId
+     * @param memberId
+     * @return
+     */
+    Member getByMemberId(String memberId);
 
 }
