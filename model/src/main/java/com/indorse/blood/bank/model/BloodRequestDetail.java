@@ -30,12 +30,14 @@ public class BloodRequestDetail extends BaseEntity {
     @Column
     private Integer quantityInMl;
     @Column
-    private Boolean requestCompleted;
+    private boolean requestCompleted;
     @Column
     private String info;
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "inventory_id")
     private BloodInventory bloodInventory;
+    @Column
+    private String requestId;
 
 
 }

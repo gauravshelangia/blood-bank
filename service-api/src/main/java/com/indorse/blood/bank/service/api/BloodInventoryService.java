@@ -38,6 +38,12 @@ public interface BloodInventoryService {
      */
     BloodInventory getBloodInventoryByDonationUniqueCode(String donationUniqueId);
 
+    /**
+     *
+     * @param inventoryCode
+     * @return
+     */
+    BloodInventory getBloodInventoryByInventoryCode(String inventoryCode);
 
     /**
      * Get blood if available by bloodGroup, bloodSubType and quantity

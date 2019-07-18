@@ -2,6 +2,8 @@ package com.indorse.blood.bank.service.api;
 
 import com.indorse.blood.bank.model.BloodDonationDetail;
 import com.indorse.blood.bank.rest.web.model.BloodDonationDetailDto;
+import com.indorse.blood.bank.rest.web.model.MemberDto;
+import com.indorse.blood.bank.rest.web.model.StatsPeriod;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,4 +36,10 @@ public interface BloodDonationDetailService {
      * @param donationUniqueId
      */
     void delete(String donationUniqueId);
+
+    /**
+     * Get top donors by Period (MONTH, YEAR)
+     * @return
+     */
+    List<MemberDto> getTopDonorsByPeriod(StatsPeriod period, int month, int year);
 }

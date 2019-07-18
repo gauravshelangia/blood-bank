@@ -7,4 +7,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BloodRequestDetailRepository extends CrudRepository<BloodRequestDetail, Long> {
 
+    /**
+     * Find blood request detail by requestId
+     * @param requestId
+     * @return
+     */
+    BloodRequestDetail findByRequestId(String requestId);
 }

@@ -17,12 +17,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 
 import static com.indorse.blood.bank.model.constant.ErrorCode.*;
 
+@Service
 public class BloodInventoryServiceImpl implements BloodInventoryService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BloodTestStoreServiceImpl.class);
@@ -119,20 +121,25 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
     public BloodInventoryDto getBlood(BloodGroup bloodGroup, BloodSubType bloodSubType, Integer quantity) {
         BloodInventory bloodInventory = bloodInventoryRepository.
                 findOneByActiveTrueAndBloodGroupAndBloodSubTypeAndQuantityInMlGreaterThanEqualOrderByQuantityInMlAsc(bloodGroup, bloodSubType, quantity);
-        if (ObjectUtils.isEmpty(bloodInventory)){
-            throw new BloodBankException(INSUFFICIENT_BLOOD_MSG, new Object[]{});
+        BloodInventoryDto bloodInventoryDto = null;
+        if (!ObjectUtils.isEmpty(bloodInventory)){
+            bloodInventoryDto = new BloodInventoryDto();
+            BeanUtils.copyProperties(bloodInventory, bloodInventoryDto);
+            bloodInventoryDto.setQuantityInMl(quantity);
+            bloodInventory.setQuantityInMl(bloodInventory.getQuantityInMl() - quantity);
+            bloodInventoryRepository.save(bloodInventory);
         }
-        BloodInventoryDto bloodInventoryDto = new BloodInventoryDto();
-        BeanUtils.copyProperties(bloodInventory, bloodInventoryDto);
-        bloodInventoryDto.setQuantityInMl(quantity);
-        bloodInventory.setQuantityInMl(bloodInventory.getQuantityInMl() - quantity);
-        bloodInventoryRepository.save(bloodInventory);
         return bloodInventoryDto;
     }
 
     @Override
     public BloodInventory getBloodInventoryByDonationUniqueCode(String donationUniqueId) {
         return bloodInventoryRepository.findByBloodDonationDetailDonationUniqueId(donationUniqueId);
+    }
+
+    @Override
+    public BloodInventory getBloodInventoryByInventoryCode(String inventoryCode) {
+        return bloodInventoryRepository.findByInventoryCode(inventoryCode);
     }
 
     @Override

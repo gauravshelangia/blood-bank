@@ -3,14 +3,13 @@ package com.indorse.blood.bank.service.impl;
 import com.indorse.blood.bank.dao.api.BloodDonationDetailRepository;
 import com.indorse.blood.bank.model.*;
 import com.indorse.blood.bank.model.exception.BloodBankException;
-import com.indorse.blood.bank.rest.web.model.BloodDonationDetailDto;
-import com.indorse.blood.bank.rest.web.model.BloodInventoryDto;
-import com.indorse.blood.bank.rest.web.model.BloodTestStoreDto;
+import com.indorse.blood.bank.rest.web.model.*;
 import com.indorse.blood.bank.service.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static com.indorse.blood.bank.model.constant.ErrorCode.*;
 
+@Service
 public class BloodDonationDetailServiceImpl implements BloodDonationDetailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BloodDonationDetailServiceImpl.class);
@@ -153,4 +153,12 @@ public class BloodDonationDetailServiceImpl implements BloodDonationDetailServic
         bloodDonationDetail.setMarkForDelete(true);
         bloodDonationDetailRepository.save(bloodDonationDetail);
     }
+
+    @Override
+    public List<MemberDto> getTopDonorsByPeriod(StatsPeriod period, int month, int year) {
+        //TODO write query
+        return null;
+    }
+
+
 }

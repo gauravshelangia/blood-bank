@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/v1/blood-bank/")
+@RequestMapping("/v1/blood-bank")
 @Api(description = "Provides operation around blood bank ")
 public class BloodBankController {
 

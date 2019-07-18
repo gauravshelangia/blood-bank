@@ -10,7 +10,7 @@ public interface BloodRequestDetailService {
      * save blood request
      * @param bloodRequestDetailDto
      */
-    void add(BloodRequestDetailDto bloodRequestDetailDto);
+    BloodRequestDetailDto add(BloodRequestDetailDto bloodRequestDetailDto);
 
     /**
      * update blood request
@@ -21,12 +21,20 @@ public interface BloodRequestDetailService {
     /**
      * Get blood request by ID
      * @param bloodRequestId
+     * @return
      */
-    void getBloodRequestDetail(Long bloodRequestId);
+    BloodRequestDetailDto getBloodRequestDetail(String bloodRequestId);
 
     /**
      * Delete bloodRequestDetail by id
      * @param bloodRequestId
      */
-    void deleteBloodRequestDetailById(Long bloodRequestId);
+    void deleteBloodRequestDetailById(String bloodRequestId);
+
+    /**
+     * Return requested blood if available or return null
+     * @param bloodRequestDetailDto
+     * @return
+     */
+    BloodRequestDetailDto requestBlood(BloodRequestDetailDto bloodRequestDetailDto);
 }
