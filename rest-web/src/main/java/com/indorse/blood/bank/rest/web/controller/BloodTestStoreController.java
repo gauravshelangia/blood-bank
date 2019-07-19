@@ -31,6 +31,12 @@ public class BloodTestStoreController {
         return new ApiResponseDto<BloodTestStoreDto>(bloodTestStoreDto, "Blood Test store details Fetched successfully", ApiResponseDto.STATUS_SUCCESS);
     }
 
+    @GetMapping(value = "/inventory/{inventoryCode}")
+    public ApiResponseDto<BloodTestStoreDto>getBloodTestStoreDetailbyInventoryCode(HttpServletRequest request, @PathVariable String inventoryCode) {
+        BloodTestStoreDto bloodTestStoreDto = bloodTestStoreService.getByInventoryCode(inventoryCode);
+        return new ApiResponseDto<BloodTestStoreDto>(bloodTestStoreDto, "Blood Test store details Fetched successfully", ApiResponseDto.STATUS_SUCCESS);
+    }
+
     @PutMapping(value = "/{testId}")
     public ApiResponseDto update(HttpServletRequest request, @PathVariable String testId,
                                                 @RequestBody BloodTestStoreDto bloodTestStoreDto) {

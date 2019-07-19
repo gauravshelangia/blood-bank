@@ -15,4 +15,5 @@ public class BloodTestStoreDto {
     private String testId;
     private BloodGroup bloodGroup;
     private BloodSubType bloodSubType;
+    private String inventoryCode;
 }

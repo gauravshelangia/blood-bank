@@ -58,16 +58,16 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
         if (ObjectUtils.isEmpty(donationDetail)){
             throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"donationDetail ", bloodInventoryDto.getDonationUniqueId()});
         }
-        BloodTestStore bloodTestStore = bloodTestStoreService.getBloodTestStoreByTestId(bloodInventoryDto.getTestId());
-        if (ObjectUtils.isEmpty(bloodTestStore)){
-            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"bloodTestStore ", bloodInventoryDto.getTestId()});
-        }
 
         BloodInventory bloodInventory = new BloodInventory();
+        BloodTestStore bloodTestStore = bloodTestStoreService.getBloodTestStoreByTestId(bloodInventoryDto.getTestId());
+        if (!ObjectUtils.isEmpty(bloodTestStore)){
+            bloodInventory.setBloodTestStore(bloodTestStore);
+        }
+
         BeanUtils.copyProperties(bloodInventoryDto, bloodInventory);
         bloodInventory.setBloodBankBranch(bloodBankBranch);
         bloodInventory.setBloodDonationDetail(donationDetail);
-        bloodInventory.setBloodTestStore(bloodTestStore);
         bloodInventory.setActive(false);
         bloodInventory.setExpiresOn(getExpiryDate(bloodInventoryDto.getBloodSubType()));
         bloodInventory = bloodInventoryRepository.save(bloodInventory);
@@ -79,7 +79,7 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
 
     private Date getExpiryDate(BloodSubType bloodSubType) {
         Date today = new Date();
-        Long expiryTime = today.getTime() + 24 * 60 * 60 * 1000 * (bloodSubType.getExpiryInDays());
+        Long expiryTime = today.getTime() + (long)24 * 60 * 60 * 1000 * (bloodSubType.getExpiryInDays());
         return new Date(expiryTime);
     }
 
@@ -104,11 +104,10 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
             throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"donationDetail ", bloodInventoryDto.getDonationUniqueId()});
         }
         BloodTestStore bloodTestStore = bloodTestStoreService.getBloodTestStoreByTestId(bloodInventoryDto.getTestId());
-        if (ObjectUtils.isEmpty(bloodTestStore)){
-            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"bloodTestStore ", bloodInventoryDto.getTestId()});
+        if (!ObjectUtils.isEmpty(bloodTestStore)){
+            bloodInventory.setBloodTestStore(bloodTestStore);
         }
         bloodInventory.setBloodDonationDetail(donationDetail);
-        bloodInventory.setBloodTestStore(bloodTestStore);
         bloodInventory.setBloodBankBranch(bloodBankBranch);
         bloodInventory.setActive(false);
         bloodInventory.setBloodSubType(bloodInventoryDto.getBloodSubType());
@@ -127,6 +126,7 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
             BeanUtils.copyProperties(bloodInventory, bloodInventoryDto);
             bloodInventoryDto.setQuantityInMl(quantity);
             bloodInventory.setQuantityInMl(bloodInventory.getQuantityInMl() - quantity);
+            bloodInventoryDto.setBloodBankBranchCode(bloodInventory.getBloodBankBranch().getBranchCode());
             bloodInventoryRepository.save(bloodInventory);
         }
         return bloodInventoryDto;
@@ -150,9 +150,9 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
     }
 
     @Override
-    public void markInventoryAsInactive(String testId) {
+    public void markInventoryAsActive(String testId) {
         BloodInventory bloodInventory = bloodInventoryRepository.findByBloodTestStoreTestId(testId);
-        bloodInventory.setActive(false);
+        bloodInventory.setActive(true);
         bloodInventoryRepository.save(bloodInventory);
     }
 }

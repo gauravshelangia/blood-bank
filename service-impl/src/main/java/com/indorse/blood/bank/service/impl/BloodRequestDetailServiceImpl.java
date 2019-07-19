@@ -61,7 +61,7 @@ public class BloodRequestDetailServiceImpl implements BloodRequestDetailService 
         bloodRequestDetail.setRequestedFromBranch(bloodBankBranch);
         bloodRequestDetail.setRequestCompleted(false);
         bloodRequestDetail = bloodRequestDetailRepository.save(bloodRequestDetail);
-        bloodRequestDetail.setRequestId(BLOOD_REQUEST_PREFIX + bloodRequestDetail);
+        bloodRequestDetail.setRequestId(BLOOD_REQUEST_PREFIX + bloodRequestDetail.getId());
         bloodRequestDetail = bloodRequestDetailRepository.save(bloodRequestDetail);
         bloodRequestDetailDto.setBloodRequestId(bloodRequestDetail.getRequestId());
         return bloodRequestDetailDto;
@@ -147,6 +147,8 @@ public class BloodRequestDetailServiceImpl implements BloodRequestDetailService 
             requestDetailDto.setRequestCompleted(true);
             requestDetailDto.setGivenOn(new Date());
             this.update(requestDetailDto);
+        } else {
+            requestDetailDto = null;
         }
         return requestDetailDto;
     }

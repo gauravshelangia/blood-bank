@@ -68,13 +68,6 @@ public class BloodDonationDetailServiceImpl implements BloodDonationDetailServic
         }
         donationDetail.setMember(member);
 
-        // add blood to Test store as well
-        BloodTestStoreDto bloodTestStoreDto = new BloodTestStoreDto();
-        bloodTestStoreDto.setConductedOn(new Date());
-        bloodTestStoreDto.setBloodGroup(donationDetailDto.getBloodGroup());
-        bloodTestStoreDto.setBloodSubType(donationDetailDto.getBloodSubType());
-        bloodTestStoreDto = bloodTestStoreService.add(bloodTestStoreDto);
-
         donationDetail = bloodDonationDetailRepository.save(donationDetail);
         donationDetail.setDonationUniqueId(BLOOD_DONATION_PREFIX + donationDetail.getId());
         donationDetail = bloodDonationDetailRepository.save(donationDetail);
@@ -87,10 +80,9 @@ public class BloodDonationDetailServiceImpl implements BloodDonationDetailServic
         bloodInventoryDto.setBloodSubType(donationDetailDto.getBloodSubType());
         bloodInventoryDto.setQuantityInMl(donationDetailDto.getQuantityInMl());
         bloodInventoryDto.setDonationUniqueId(donationDetail.getDonationUniqueId());
-        bloodInventoryDto.setTestId(bloodTestStoreDto.getTestId());
 
         bloodInventoryDto = bloodInventoryService.add(bloodInventoryDto);
-
+        donationDetailDto.setInventoryCode(bloodInventoryDto.getInventoryCode());
         // link inventory to donation detail
         donationDetail = bloodDonationDetailRepository.save(donationDetail);
         return donationDetailDto;

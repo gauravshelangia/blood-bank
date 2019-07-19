@@ -1,8 +1,11 @@
 package com.indorse.blood.bank.service.impl;
 
 import com.indorse.blood.bank.dao.api.BloodTestStoreRepository;
+import com.indorse.blood.bank.model.BloodInventory;
 import com.indorse.blood.bank.model.BloodTestStore;
 import com.indorse.blood.bank.model.exception.BloodBankException;
+import com.indorse.blood.bank.rest.web.model.BloodInventoryDto;
+import com.indorse.blood.bank.rest.web.model.BloodRequestDetailDto;
 import com.indorse.blood.bank.rest.web.model.BloodTestStoreDto;
 import com.indorse.blood.bank.service.api.BloodDonationDetailService;
 import com.indorse.blood.bank.service.api.BloodInventoryService;
@@ -47,10 +50,24 @@ public class BloodTestStoreServiceImpl implements BloodTestStoreService {
         if (ObjectUtils.isEmpty(bloodTestStore.getConductedOn())) {
             bloodTestStore.setConductedOn(new Date());
         }
+        BloodInventory bloodInventory = bloodInventoryService.getBloodInventoryByInventoryCode(bloodTestStoreDto.getInventoryCode());
+        bloodTestStore.setBloodGroup(bloodInventory.getBloodGroup());
+        bloodTestStore.setBloodSubType(bloodInventory.getBloodSubType());
         bloodTestStore = bloodTestStoreRepository.save(bloodTestStore);
         bloodTestStore.setTestId(BLOOD_TEST_PREFIX+bloodTestStore.getId());
         bloodTestStore = bloodTestStoreRepository.save(bloodTestStore);
         bloodTestStoreDto.setTestId(bloodTestStore.getTestId());
+
+
+        BloodInventoryDto bloodInventoryDto= new BloodInventoryDto();
+        BeanUtils.copyProperties(bloodInventory, bloodInventoryDto);
+        bloodInventoryDto.setBloodBankBranchCode(bloodInventory.getBloodBankBranch().getBranchCode());
+        bloodInventoryDto.setDonationUniqueId(bloodInventory.getBloodDonationDetail().getDonationUniqueId());
+        bloodInventoryDto.setTestId(bloodTestStoreDto.getTestId());
+        bloodInventoryService.update(bloodInventoryDto);
+        bloodTestStoreDto.setBloodSubType(bloodTestStore.getBloodSubType());
+        bloodTestStoreDto.setBloodGroup(bloodTestStore.getBloodGroup());
+
         return bloodTestStoreDto;
     }
 
@@ -81,6 +98,18 @@ public class BloodTestStoreServiceImpl implements BloodTestStoreService {
     }
 
     @Override
+    public BloodTestStoreDto getByInventoryCode(String inventoryCode) {
+        BloodInventory bloodInventory = bloodInventoryService.getBloodInventoryByInventoryCode(inventoryCode);
+        BloodTestStore bloodTestStore = bloodInventory.getBloodTestStore();
+        if (ObjectUtils.isEmpty(bloodTestStore)){
+            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodTest Store", inventoryCode});
+        }
+        BloodTestStoreDto bloodTestStoreDto = new BloodTestStoreDto();
+        BeanUtils.copyProperties(bloodTestStore, bloodTestStoreDto);
+        return bloodTestStoreDto;
+    }
+
+    @Override
     public BloodTestStore getBloodTestStoreByTestId(String testId) {
         return bloodTestStoreRepository.findByTestId(testId);
     }
@@ -94,8 +123,8 @@ public class BloodTestStoreServiceImpl implements BloodTestStoreService {
         }
         bloodTestStore.setPassed(passed);
         bloodTestStore.setInfo(info);
-        if (!passed) {
-            bloodInventoryService.markInventoryAsInactive(testId);
+        if (passed) {
+            bloodInventoryService.markInventoryAsActive(testId);
         }
         bloodTestStoreRepository.save(bloodTestStore);
     }

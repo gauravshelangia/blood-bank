@@ -28,6 +28,13 @@ public interface BloodTestStoreService {
     BloodTestStoreDto getByTestId(String testId);
 
     /**
+     * Get test store for a inventory block
+     * @param inventoryCode
+     * @return
+     */
+    BloodTestStoreDto getByInventoryCode(String inventoryCode);
+
+    /**
      * Get BloodTest detail by testId
      * @param testId
      * @return

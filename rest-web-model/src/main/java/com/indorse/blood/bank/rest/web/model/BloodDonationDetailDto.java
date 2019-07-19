@@ -17,5 +17,6 @@ public class BloodDonationDetailDto extends BaseDto{
     private String memberId;
     private String donationUniqueId;
     private BloodSubType bloodSubType;
+    private String inventoryCode;
 
 }

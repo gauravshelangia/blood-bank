@@ -59,6 +59,6 @@ public interface BloodInventoryService {
      * Mark blood as inactive by inventoryId
      * @param inventoryCode
      */
-    void markInventoryAsInactive(String inventoryCode);
+    void markInventoryAsActive(String inventoryCode);
 
 }
