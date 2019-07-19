@@ -22,5 +22,9 @@
             <groupId>com.indorse.blood.bank</groupId>
             <artifactId>blood-bank-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.indorse.blood.bank</groupId>
+            <artifactId>blood-bank-rest-web-model</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -2,8 +2,9 @@ package com.indorse.blood.bank.rest.web.controller;
 
 import com.indorse.blood.bank.rest.web.model.ApiResponseDto;
 import com.indorse.blood.bank.rest.web.model.BloodDonationDetailDto;
+import com.indorse.blood.bank.rest.web.model.DonorStatDto;
 import com.indorse.blood.bank.rest.web.model.MemberDto;
-import com.indorse.blood.bank.rest.web.model.StatsPeriod;
+import com.indorse.blood.bank.rest.web.model.constant.StatsPeriod;
 import com.indorse.blood.bank.service.api.BloodDonationDetailService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,10 @@ public class BloodDonationDetailController {
     }
 
     @GetMapping(value = "/top-donors")
-    public ApiResponseDto<List<MemberDto>> getTopDonorByPeriod(HttpServletRequest request, @RequestParam StatsPeriod period,
-                                                               @RequestParam(required = false) Integer month, @RequestParam(required = false) Integer year) {
-        return new ApiResponseDto<List<MemberDto>>(bloodDonationDetailService.getTopDonorsByPeriod(period, month, year), "Top donor list Fetched successfully", ApiResponseDto.STATUS_SUCCESS);
+    public ApiResponseDto<List<DonorStatDto>> getTopDonorByPeriod(HttpServletRequest request, @RequestParam StatsPeriod period,
+                                                                  @RequestParam(required = false) Integer month, @RequestParam(required = false) Integer year,
+                                                                  @RequestParam(required = false, defaultValue = "3") Integer limit) {
+        return new ApiResponseDto<List<DonorStatDto>>(bloodDonationDetailService.getTopDonorsByPeriod(period, month, year, limit)
+                , "Top donor list Fetched successfully", ApiResponseDto.STATUS_SUCCESS);
     }
 }

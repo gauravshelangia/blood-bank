@@ -39,7 +39,7 @@ public class BloodTestStoreServiceImpl implements BloodTestStoreService {
         if (ObjectUtils.isEmpty(bloodTestStoreDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Test Details"});
         }
-        if (ObjectUtils.isEmpty(bloodTestStoreDto.getTestId())) {
+        if (!ObjectUtils.isEmpty(bloodTestStoreDto.getTestId())) {
             throw new BloodBankException(NEW_ENTITY_WITH_ID_CODE, new Object[]{"Blood Test detail", bloodTestStoreDto.getTestId()});
         }
         BloodTestStore bloodTestStore = new BloodTestStore();

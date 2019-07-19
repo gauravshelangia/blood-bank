@@ -45,7 +45,7 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
         if (ObjectUtils.isEmpty(bloodInventoryDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Inventory"});
         }
-        if (ObjectUtils.isEmpty(bloodInventoryDto.getInventoryCode())) {
+        if (!ObjectUtils.isEmpty(bloodInventoryDto.getInventoryCode())) {
             throw new BloodBankException(NEW_ENTITY_WITH_ID_CODE,
                     new Object[]{"BloodInventory", bloodInventoryDto.getInventoryCode()});
         }

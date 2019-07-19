@@ -18,6 +18,7 @@ public class BloodDonationDetail extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private BloodBankBranch bloodBankBranch;
+    @Temporal(value = TemporalType.TIMESTAMP)
     @Column
     private Date donatedOn;
     @Column
