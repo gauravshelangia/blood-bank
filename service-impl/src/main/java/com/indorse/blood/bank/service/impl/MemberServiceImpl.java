@@ -18,7 +18,7 @@ import static com.indorse.blood.bank.model.constant.ErrorCode.*;
 public class MemberServiceImpl implements MemberService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);
-    private static final String MEMBER_ID_PREFIX = "BBM";
+    public static final String MEMBER_ID_PREFIX = "BBM";
 
     @Autowired
     private MemberRepository memberRepository;
@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberDto add(MemberDto memberDto) {
-        LOGGER.info("Adding Member {}", memberDto.toString());
+        LOGGER.info("Adding Member {}", memberDto);
         if (ObjectUtils.isEmpty(memberDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"member"});
         }
@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void update(MemberDto memberDto) {
-        LOGGER.info("Updating Member {}", memberDto.toString());
+        LOGGER.info("Updating Member {}", memberDto);
         if (ObjectUtils.isEmpty(memberDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"member"});
         }

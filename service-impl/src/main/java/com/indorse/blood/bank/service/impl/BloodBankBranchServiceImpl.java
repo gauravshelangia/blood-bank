@@ -24,7 +24,7 @@ public class BloodBankBranchServiceImpl implements BloodBankBranchService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BloodBankBranchServiceImpl.class);
 
-    private static final String BRANCH_CODE_PREFIX = "BR";
+    public static final String BRANCH_CODE_PREFIX = "BR";
 
     @Autowired
     private BloodBankBranchRepository bloodBankBranchRepository;
@@ -35,12 +35,12 @@ public class BloodBankBranchServiceImpl implements BloodBankBranchService {
 
     @Override
     public BloodBankBranchDto add(BloodBankBranchDto bloodBankBranchDto) {
-        LOGGER.info("BloodBank branch = {} ", bloodBankBranchDto.getBranchName());
+        LOGGER.info("BloodBank branch = {} ", bloodBankBranchDto);
         if (ObjectUtils.isEmpty(bloodBankBranchDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Bank branch"});
         }
         BloodBank bloodBank = bloodBankService.getBloodBankModelByName(bloodBankBranchDto.getBloodBankName());
-        if (ObjectUtils.isEmpty(bloodBankBranchDto)) {
+        if (ObjectUtils.isEmpty(bloodBank)) {
             throw new BloodBankException(BLOOD_BANK_NOT_EXIST, new Object[]{bloodBankBranchDto.getBloodBankName()});
         }
         BloodBankBranch bloodBankBranch = new BloodBankBranch();
@@ -61,7 +61,7 @@ public class BloodBankBranchServiceImpl implements BloodBankBranchService {
         }
         BloodBankBranch bloodBankBranch = bloodBankBranchRepository.findByBranchCode(bloodBankBranchDto.getBranchCode());
         if (ObjectUtils.isEmpty(bloodBankBranch)) {
-            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodBankBranch", bloodBankBranch.getBranchCode()});
+            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodBankBranch", bloodBankBranch});
         }
         updateFields(bloodBankBranch, bloodBankBranchDto);
         BloodBank bloodBank = bloodBankService.getBloodBankModelByName(bloodBankBranchDto.getBloodBankName());
@@ -73,6 +73,7 @@ public class BloodBankBranchServiceImpl implements BloodBankBranchService {
     }
 
     private void updateFields(BloodBankBranch bloodBankBranch, BloodBankBranchDto bloodBankBranchDto) {
+        bloodBankBranch.setBranchName(bloodBankBranchDto.getBranchName());
         bloodBankBranch.setState(bloodBankBranchDto.getState());
         bloodBankBranch.setPostalCode(bloodBankBranchDto.getPostalCode());
         bloodBankBranch.setPhoneNumber(bloodBankBranchDto.getPhoneNumber());

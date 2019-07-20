@@ -20,7 +20,7 @@ import static com.indorse.blood.bank.model.constant.ErrorCode.RESOURCE_NOT_FOUND
 public class BloodBankServiceImpl implements BloodBankService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BloodBankServiceImpl.class);
-    private static final String BLOOD_BANK = "BB";
+    protected static final String BLOOD_BANK_PREFIX = "BB";
 
     @Autowired
     private BloodBankRepository bloodBankRepository;
@@ -36,7 +36,7 @@ public class BloodBankServiceImpl implements BloodBankService {
         BloodBank bloodBank = new BloodBank();
         BeanUtils.copyProperties(bloodBankDto, bloodBank);
         bloodBank = bloodBankRepository.save(bloodBank);
-        bloodBank.setBankCode(BLOOD_BANK + bloodBank.getId());
+        bloodBank.setBankCode(BLOOD_BANK_PREFIX + bloodBank.getId());
         bloodBank = bloodBankRepository.save(bloodBank);
         bloodBankDto.setBankCode(bloodBank.getBankCode());
         return bloodBankDto;
