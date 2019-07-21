@@ -29,7 +29,7 @@ public class BloodBankServiceImpl implements BloodBankService {
 
     @Override
     public BloodBankDto save(BloodBankDto bloodBankDto) {
-        LOGGER.info("Adding Blood Bank with name = {}", bloodBankDto.getName());
+        LOGGER.info("Adding Blood Bank with name = {}", bloodBankDto);
         if (ObjectUtils.isEmpty(bloodBankDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Bank"});
         }
@@ -44,14 +44,13 @@ public class BloodBankServiceImpl implements BloodBankService {
 
     @Override
     public void update(BloodBankDto bloodBankDto) {
-        LOGGER.info("Updating blood bank {}", bloodBankDto.getName());
+        LOGGER.info("Updating blood bank {}", bloodBankDto);
         if (ObjectUtils.isEmpty(bloodBankDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"blood bank"});
         }
-        BloodBank bloodBank = bloodBankRepository.findByBankCodeOrName(bloodBankDto.getBankCode(),
-                bloodBankDto.getName());
+        BloodBank bloodBank = bloodBankRepository.findByBankCode(bloodBankDto.getBankCode());
         if (ObjectUtils.isEmpty(bloodBank)) {
-            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodBank", bloodBankDto.getBankCode() + ", "
+            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodBank", bloodBank.getBankCode() + ", "
                     + bloodBank.getName()});
         }
         bloodBank.setName(bloodBankDto.getName());
@@ -62,7 +61,7 @@ public class BloodBankServiceImpl implements BloodBankService {
     public BloodBankDto getByName(String name) {
         LOGGER.info("Fetching blood bank {}", name);
         BloodBankDto bloodBankDto = new BloodBankDto();
-        BloodBank bloodBank = bloodBankRepository.findByBankCodeOrName(null, name);
+        BloodBank bloodBank = bloodBankRepository.findByName(name);
         BeanUtils.copyProperties(bloodBank, bloodBankDto);
         return bloodBankDto;
     }
