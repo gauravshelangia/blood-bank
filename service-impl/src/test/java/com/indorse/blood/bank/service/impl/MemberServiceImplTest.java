@@ -39,12 +39,12 @@ public class MemberServiceImplTest {
     private ArgumentCaptor<Member> memberArgumentCaptor;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         verifyNoMoreInteractions(memberRepository);
     }
 

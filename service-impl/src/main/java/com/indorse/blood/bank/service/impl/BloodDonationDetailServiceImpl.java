@@ -70,7 +70,6 @@ public class BloodDonationDetailServiceImpl implements BloodDonationDetailServic
 
         donationDetail = bloodDonationDetailRepository.save(donationDetail);
         donationDetail.setDonationUniqueId(BLOOD_DONATION_PREFIX + donationDetail.getId());
-        donationDetail = bloodDonationDetailRepository.save(donationDetail);
         donationDetailDto.setDonationUniqueId(donationDetail.getDonationUniqueId());
 
         // Add blood to inventory
@@ -83,8 +82,9 @@ public class BloodDonationDetailServiceImpl implements BloodDonationDetailServic
 
         bloodInventoryDto = bloodInventoryService.add(bloodInventoryDto);
         donationDetailDto.setInventoryCode(bloodInventoryDto.getInventoryCode());
-        // link inventory to donation detail
+
         donationDetail = bloodDonationDetailRepository.save(donationDetail);
+
         return donationDetailDto;
     }
 

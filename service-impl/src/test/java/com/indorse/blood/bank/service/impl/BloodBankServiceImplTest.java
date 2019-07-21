@@ -37,12 +37,12 @@ public class BloodBankServiceImplTest {
     private ArgumentCaptor<BloodBank> bloodBankArgumentCaptor;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         verifyNoMoreInteractions(bloodBankBranchService);
         verifyNoMoreInteractions(bloodBankRepository);
     }

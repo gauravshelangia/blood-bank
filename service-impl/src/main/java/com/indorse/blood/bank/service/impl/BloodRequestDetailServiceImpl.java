@@ -42,8 +42,9 @@ public class BloodRequestDetailServiceImpl implements BloodRequestDetailService 
     @Override
     public BloodRequestDetailDto add(BloodRequestDetailDto bloodRequestDetailDto) {
 
-        LOGGER.info("Adding Blood Request with member = {}", bloodRequestDetailDto.getMemberId());
+        LOGGER.info("Adding Blood Request with member = {}", bloodRequestDetailDto);
         if (ObjectUtils.isEmpty(bloodRequestDetailDto)) {
+
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Request"});
         }
         BloodRequestDetail bloodRequestDetail = new BloodRequestDetail();
@@ -70,7 +71,7 @@ public class BloodRequestDetailServiceImpl implements BloodRequestDetailService 
 
     @Override
     public void update(BloodRequestDetailDto bloodRequestDetailDto) {
-        LOGGER.info("Adding Blood Request with member = {}", bloodRequestDetailDto.getMemberId());
+        LOGGER.info("Adding Blood Request with member = {}", bloodRequestDetailDto);
         if (ObjectUtils.isEmpty(bloodRequestDetailDto)) {
             throw new BloodBankException(CRUD_EMPTY_ENTITY_ERROR, new Object[]{"Blood Request"});
         }
@@ -92,17 +93,18 @@ public class BloodRequestDetailServiceImpl implements BloodRequestDetailService 
         bloodRequestDetail.setRequestedFromBranch(requestedBloodBankBranch);
 
         BloodBankBranch givenBloodBankBranch =
-                bloodBankBranchService.getBloodBankBranchModelByBranchCode(bloodRequestDetailDto.getGivenFromBranchCode());
+                bloodBankBranchService.getBloodBankBranchModelByBranchCode(bloodRequestDetailDto.getRequestedFromBranchCode());
         if (ObjectUtils.isEmpty(givenBloodBankBranch)) {
             throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"Given Blood Bank Branch", bloodRequestDetailDto.getGivenFromBranchCode()});
         }
         bloodRequestDetail.setGivenFromBranch(givenBloodBankBranch);
-
-        BloodInventory bloodInventory = bloodInventoryService.getBloodInventoryByInventoryCode(bloodRequestDetailDto.getInventoryCode());
-        if (ObjectUtils.isEmpty(bloodInventory)) {
-            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"bloodInventory", bloodRequestDetailDto.getInventoryCode()});
+        if (!ObjectUtils.isEmpty(bloodRequestDetailDto.getInventoryCode())) {
+            BloodInventory bloodInventory = bloodInventoryService.getBloodInventoryByInventoryCode(bloodRequestDetailDto.getInventoryCode());
+            if (ObjectUtils.isEmpty(bloodInventory)) {
+                throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"bloodInventory", bloodRequestDetailDto.getInventoryCode()});
+            }
+            bloodRequestDetail.setBloodInventory(bloodInventory);
         }
-        bloodRequestDetail.setBloodInventory(bloodInventory);
 
         bloodRequestDetail.setRequestCompleted(bloodRequestDetailDto.isRequestCompleted());
         bloodRequestDetail.setBloodGroup(bloodRequestDetailDto.getBloodGroup());

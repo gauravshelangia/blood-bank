@@ -28,7 +28,7 @@ import static com.indorse.blood.bank.model.constant.ErrorCode.*;
 public class BloodInventoryServiceImpl implements BloodInventoryService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BloodTestStoreServiceImpl.class);
-    private static final String BLOOD_INVENTORY_PREFIX = "BI";
+    protected static final String BLOOD_INVENTORY_PREFIX = "BI";
 
     @Autowired
     private BloodInventoryRepository bloodInventoryRepository;
@@ -90,8 +90,7 @@ public class BloodInventoryServiceImpl implements BloodInventoryService {
         }
         BloodInventory bloodInventory = bloodInventoryRepository.findByInventoryCode(bloodInventoryDto.getInventoryCode());
         if (ObjectUtils.isEmpty(bloodInventory)) {
-            throw new BloodBankException(NEW_ENTITY_WITH_ID_CODE,
-                    new Object[]{"BloodInventory", bloodInventoryDto.getInventoryCode()});
+            throw new BloodBankException(RESOURCE_NOT_FOUND, new Object[]{"BloodInventory", bloodInventoryDto});
         }
         BloodBankBranch bloodBankBranch =
                 bloodBankBranchService.getBloodBankBranchModelByBranchCode(bloodInventoryDto.getBloodBankBranchCode());
