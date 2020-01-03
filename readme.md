@@ -1,6 +1,6 @@
-# auth-wizard
+# blood-bank
 
-This application contains simple user auth system with spring boot. 
+This application implements the whole backend system for managing multiple blood banks. The whole appliaction is written in java with Spring boot framework.
 
 ## Requirements
 ### Install postgresql 
